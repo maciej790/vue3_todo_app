@@ -1,78 +1,80 @@
 <template>
-    <div class="board">
-        <Header />
-        <Input 
-            @handle-from-child = 'handleFromChild($event)' 
-            @handle-add-item="addItem"
-        />
-        <TodoItem />
-
-        <p v-for="item in state.tasks" :key="item.id">
-            {{item.title}}
-        </p>
-    </div>
+  <div class="board">
+    <Header />
+    <Input
+      @handle-from-child="handleFromChild($event)"
+      @handle-add-item="addItem"
+    />
+    <TodoItem :tasks="state.tasks" @remove-element="handleRemoveElement" />
+  </div>
 </template>
 
 <script>
+import Header from "./Header.vue";
+import Input from "./Input.vue";
+import TodoItem from "./TodoItem.vue";
 
-import Header from './Header.vue'
-import Input from './Input.vue'
-import TodoItem from './TodoItem.vue'
-
-import { reactive } from 'vue'
+import { reactive } from "vue";
 export default {
-    name: 'Board',
-    components: {
-        Header,
-        Input,
-        TodoItem,
-    },
+  name: "Board",
+  components: {
+    Header,
+    Input,
+    TodoItem,
+  },
 
-    setup(){
+  setup() {
+    const state = reactive({
+      inputValue: "",
+      tasks: [],
+    });
 
-        const state = reactive({
-            inputValue: '',
-            tasks: [
-                {id: Math.random() ,title: 'go for a walk', complete: false},
-                {id: Math.random() ,title: 'learn a vue', complete: false},
-                {id: Math.random() ,title: 'learn a react', complete: false}
-            ]
-        })
+    const handleFromChild = (payload) => {
+      state.inputValue = payload;
+    };
 
-     
-        const handleFromChild = (payload) =>{
-            state.inputValue = payload
-        }
+    const addItem = () => {
+      if (state.inputValue !== "") {
+        state.tasks.push({
+          id: Math.random() + 1,
+          title: state.inputValue,
+          complete: false,
+        });
 
-        const addItem = () =>{
-            state.tasks.push({
-                id: Math.random(),
-                title: state.inputValue,
-                complete: false
-            })
+        state.inputValue = "";
+      } else {
+        alert("First You must type a task!");
+      }
+    };
 
-        }
+    const handleRemoveElement = (payload) => {
+      const id = payload;
 
-    return{
-        state,
-        handleFromChild,
-        addItem
-    }
-    }
-}
+      const index = state.tasks.findIndex((el) => el.id === id);
+      state.tasks.splice(index, 1);
+    };
+
+    return {
+      state,
+      handleFromChild,
+      addItem,
+      handleRemoveElement,
+    };
+  },
+};
 </script>
 
 <style>
-    .board{
-        width: 50%;
-        height: 500px;
-        background-color: rgba(255, 255, 255, 0.8);
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 100px;
-        border-radius: 20px;
-        display: flex;
-        flex-direction: column;
-    }
-
+.board {
+  width: 50%;
+  height: auto;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 50px;
+}
 </style>
