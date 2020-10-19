@@ -1,21 +1,33 @@
 <template>
   <div>
-    <Todo />
+      <Board />
   </div>
 </template>
 
 <script>
 
-import Todo from './components/Todo.vue'
+import Board from './components/Board.vue'
 
 export default {
   name: 'App',
   components: {
-    Todo
+    Board
   }
 }
 </script>
 
 <style>
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
 
+  body{
+    background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+    background-repeat: no-repeat;
+    height: 100vh;
+    font-family: 'Open Sans Condensed', sans-serif;
+  }
 </style>
