@@ -14,7 +14,7 @@ import Header from "./Header.vue";
 import Input from "./Input.vue";
 import TodoItem from "./TodoItem.vue";
 
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 export default {
   name: "Board",
   components: {
@@ -29,6 +29,11 @@ export default {
       tasks: [],
     });
 
+    //get a task from localstorage
+    onMounted(() => {
+      state.tasks = JSON.parse(localStorage.getItem("el"));
+    });
+
     const handleFromChild = (payload) => {
       state.inputValue = payload;
     };
@@ -41,6 +46,9 @@ export default {
           complete: false,
         });
 
+        //save task to localstorage
+        localStorage.setItem("el", JSON.stringify(state.tasks));
+
         state.inputValue = "";
       } else {
         alert("First You must type a task!");
@@ -52,6 +60,9 @@ export default {
 
       const index = state.tasks.findIndex((el) => el.id === id);
       state.tasks.splice(index, 1);
+
+      //remove task from localstorage
+      localStorage.setItem("el", JSON.stringify(state.tasks));
     };
 
     return {
