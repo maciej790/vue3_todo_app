@@ -33,7 +33,7 @@ export default {
 
     //get a task from localstorage
     onMounted(() => {
-      state.tasks = JSON.parse(localStorage.getItem("el"));
+      if (JSON.parse(localStorage.getItem('el'))) this.tasks = JSON.parse(localStorage.getItem('el'));
     });
 
     const handleFromChild = (payload) => {
