@@ -1,11 +1,15 @@
 <template>
   <div class="board">
-    <Header :date="state.date"/>
+    <Header :date="state.date" />
     <Input
       @handle-from-child="handleFromChild($event)"
       @handle-add-item="addItem"
     />
-    <TodoItem :tasks="state.tasks" @remove-element="handleRemoveElement" @check="check"/>
+    <TodoItem
+      :tasks="state.tasks"
+      @remove-element="handleRemoveElement"
+      @check="check"
+    />
   </div>
 </template>
 
@@ -28,12 +32,20 @@ export default {
       inputValue: "",
       tasks: [],
       today: new Date(),
-      date: computed(() => state.today.getDate()+'/'+(state.today.getMonth()+1)+'/'+state.today.getFullYear()),
+      date: computed(
+        () =>
+          state.today.getDate() +
+          "/" +
+          (state.today.getMonth() + 1) +
+          "/" +
+          state.today.getFullYear()
+      ),
     });
 
     //get a task from localstorage
     onMounted(() => {
-      if (JSON.parse(localStorage.getItem('el'))) state.tasks = JSON.parse(localStorage.getItem('el'));
+      if (JSON.parse(localStorage.getItem("el")))
+        state.tasks = JSON.parse(localStorage.getItem("el"));
     });
 
     const handleFromChild = (payload) => {
@@ -58,7 +70,6 @@ export default {
     };
 
     const handleRemoveElement = (payload) => {
-
       const id = payload;
 
       const index = state.tasks.findIndex((el) => el.id === id);
@@ -69,25 +80,23 @@ export default {
     };
 
     //check task
-    const check = (payload) =>{
-
-      const id = payload
+    const check = (payload) => {
+      const id = payload;
       const index = state.tasks.findIndex((el) => el.id === id);
 
-      const status = state.tasks[index].complete
-    
-      state.tasks[index].complete = !status 
+      const status = state.tasks[index].complete;
+
+      state.tasks[index].complete = !status;
 
       localStorage.setItem("el", JSON.stringify(state.tasks));
-
-    }
+    };
 
     return {
       state,
       handleFromChild,
       addItem,
       handleRemoveElement,
-      check
+      check,
     };
   },
 };
@@ -113,5 +122,4 @@ export default {
     margin-top: 50px;
   }
 }
-
 </style>

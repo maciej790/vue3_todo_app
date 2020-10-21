@@ -60,23 +60,23 @@ button {
   font-weight: bold;
 }
 
-button:hover{
+button:hover {
   cursor: pointer;
 }
 @media (max-width: 550px) {
-  .input_box{
+  .input_box {
     flex-direction: column;
     align-items: center;
     height: auto;
   }
 
-  button{
+  button {
     height: 35px;
     width: 40%;
     margin-top: 20px;
   }
 
-  input{
+  input {
     width: 60%;
   }
 }
