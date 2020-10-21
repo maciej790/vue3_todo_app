@@ -1,11 +1,11 @@
 <template>
   <div class="board">
-    <Header />
+    <Header :date="state.date"/>
     <Input
       @handle-from-child="handleFromChild($event)"
       @handle-add-item="addItem"
     />
-    <TodoItem :tasks="state.tasks" @remove-element="handleRemoveElement" />
+    <TodoItem :tasks="state.tasks" @remove-element="handleRemoveElement" @check="check"/>
   </div>
 </template>
 
@@ -14,7 +14,7 @@ import Header from "./Header.vue";
 import Input from "./Input.vue";
 import TodoItem from "./TodoItem.vue";
 
-import { reactive, onMounted } from "vue";
+import { reactive, onMounted, computed } from "vue";
 export default {
   name: "Board",
   components: {
@@ -27,6 +27,8 @@ export default {
     const state = reactive({
       inputValue: "",
       tasks: [],
+      today: new Date(),
+      date: computed(() => state.today.getDate()+'/'+(state.today.getMonth()+1)+'/'+state.today.getFullYear()),
     });
 
     //get a task from localstorage
@@ -56,6 +58,7 @@ export default {
     };
 
     const handleRemoveElement = (payload) => {
+
       const id = payload;
 
       const index = state.tasks.findIndex((el) => el.id === id);
@@ -65,11 +68,26 @@ export default {
       localStorage.setItem("el", JSON.stringify(state.tasks));
     };
 
+    //check task
+    const check = (payload) =>{
+
+      const id = payload
+      const index = state.tasks.findIndex((el) => el.id === id);
+
+      const status = state.tasks[index].complete
+    
+      state.tasks[index].complete = !status 
+
+      localStorage.setItem("el", JSON.stringify(state.tasks));
+
+    }
+
     return {
       state,
       handleFromChild,
       addItem,
       handleRemoveElement,
+      check
     };
   },
 };
@@ -88,4 +106,12 @@ export default {
   flex-direction: column;
   padding-bottom: 50px;
 }
+
+@media (max-width: 900px) {
+  .board {
+    width: 90%;
+    margin-top: 50px;
+  }
+}
+
 </style>

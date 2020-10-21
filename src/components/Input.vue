@@ -59,4 +59,25 @@ button {
   color: white;
   font-weight: bold;
 }
+
+button:hover{
+  cursor: pointer;
+}
+@media (max-width: 550px) {
+  .input_box{
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+  }
+
+  button{
+    height: 35px;
+    width: 40%;
+    margin-top: 20px;
+  }
+
+  input{
+    width: 60%;
+  }
+}
 </style>

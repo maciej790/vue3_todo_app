@@ -1,11 +1,11 @@
 <template>
     <div>
         <div class="header">
-            <div class="day">
-                <p>Monday</p>
+            <div class="title">
+                <p>Todo list</p>
             </div>
             <div class="date">
-                <p>13/10/2020</p>
+                <p>{{date}}</p>
             </div>
         </div>
     </div>
@@ -13,7 +13,11 @@
 
 <script>
 export default {
-    name: 'Header'
+    name: 'Header',
+
+    props:{
+        date: Number
+    }
 }
 </script>
 
@@ -28,12 +32,13 @@ export default {
         align-items: center;
     }
 
+
     p{
         font-size: 25px;
         color: #487B8B;
     }
 
-    .day{
+    .title{
         margin-left: 50px;
         font-weight: bold;
     }
@@ -42,4 +47,22 @@ export default {
         margin-right: 50px;
         letter-spacing: 3px;
     }
+
+    @media (max-width: 900px) {
+     p {
+        font-size: 18px;
+    }
+    .header{
+            height: 50px;
+    }
+
+    .title{
+        margin-left: 20px;
+    }
+
+    .date{
+        margin-right: 20px;
+    }
+      
+}
 </style>
