@@ -3,8 +3,7 @@
     <Header :date="state.date" />
     <Input
       @handle-from-child="handleFromChild($event)"
-      @handle-add-item="addItem"
-      :value="inputValue"
+      @handle-add-item="addItem()"
     />
     <TodoItem
       :tasks="state.tasks"
@@ -30,7 +29,7 @@ export default {
 
   setup() {
     const state = reactive({
-      inputValue: "",
+      inputValue: '',
       tasks: [],
       today: new Date(),
       date: computed(
@@ -54,6 +53,8 @@ export default {
     };
 
     const addItem = () => {
+      
+
       if (state.inputValue !== "") {
         state.tasks.push({
           id: Math.random() + 1,
@@ -61,10 +62,10 @@ export default {
           complete: false,
         });
 
+        
         //save task to localstorage
         localStorage.setItem("el", JSON.stringify(state.tasks));
 
-        state.inputValue = "";
       } else {
         alert("First You must type a task!");
       }

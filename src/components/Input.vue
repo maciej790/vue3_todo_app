@@ -4,8 +4,8 @@
       <input
         type="text"
         placeholder="Type Your task here"
-        :value="value"
         @change="$emit('handle-from-child', $event.target.value)"
+        v-model="input"
       />
       <button @click="$emit('handle-add-item'), clear()">Add task</button>
     </div>
@@ -13,30 +13,25 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref } from 'vue'
 export default {
   name: "Input",
 
-  props:{
-    value:{
-      type: String,
-      required: true
-    }
-  },
-
   setup() {
-    const inputValue = ref("");
 
-    const clear = () => {
-      inputValue.value = "";
-    };
+    const input = ref('')
 
-    return {
-      inputValue,
-      clear,
-    };
-  },
-};
+    const clear = () =>{
+      input.value = ''
+    }
+
+
+    return{
+      input,
+      clear
+    }
+  }
+}
 </script>
 
 <style scoped>
