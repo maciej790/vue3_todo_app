@@ -4,6 +4,7 @@
     <Input
       @handle-from-child="handleFromChild($event)"
       @handle-add-item="addItem"
+      :value="inputValue"
     />
     <TodoItem
       :tasks="state.tasks"

@@ -4,7 +4,7 @@
       <input
         type="text"
         placeholder="Type Your task here"
-        v-model="inputValue"
+        :value="value"
         @change="$emit('handle-from-child', $event.target.value)"
       />
       <button @click="$emit('handle-add-item'), clear()">Add task</button>
@@ -16,6 +16,13 @@
 import { ref } from "vue";
 export default {
   name: "Input",
+
+  props:{
+    value:{
+      type: String,
+      required: true
+    }
+  },
 
   setup() {
     const inputValue = ref("");
@@ -48,6 +55,7 @@ input {
   border: 2px solid #487b8b;
   border-radius: 100px;
   background-color: transparent;
+  outline: none;
 }
 
 button {
@@ -58,6 +66,7 @@ button {
   border: none;
   color: white;
   font-weight: bold;
+  outline: none;
 }
 
 button:hover {
