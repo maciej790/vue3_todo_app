@@ -61,6 +61,8 @@ export default {
           title: state.inputValue,
           complete: false,
         });
+        
+        state.inputValue = ''
 
         
         //save task to localstorage
