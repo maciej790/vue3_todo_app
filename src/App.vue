@@ -1,7 +1,8 @@
 <template>
   <div class="wrapper">
     <div class="box">
-      <SearchInput
+      <transition-group name="fade">
+         <SearchInput
         :value='state.InputValue'
         :top='state.state'
         @emit-from-input='handleChange($event)'
@@ -20,6 +21,7 @@
         :temp_min='state.temp_min'
         :temp_max='state.temp_max'
       />
+      </transition-group>
     </div>
   </div>
 </template>
@@ -38,7 +40,7 @@ export default {
     SearchInput,
     Location,
     Image,
-    Temperatures
+    Temperatures,
   },
 
   setup() {
@@ -103,7 +105,6 @@ export default {
           stateProperty[6].humidity = apiResoultMain.humidity;
           stateProperty[7].speed = apiResoult.wind.speed;
           stateProperty[8].pressure = apiResoultMain.pressure;
-               
               
 
           //change state to display component
@@ -161,14 +162,19 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
+
+        @media (max-width: 600px){
+          width: 90%;
+        }
     }
   }
 }
 
-/*
-  .fade-enter-active,
+
+.fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 1s ease;
 }
 
 .fade-enter-from,
@@ -176,5 +182,4 @@ body {
   opacity: 0;
 }
 
-*/
 </style>

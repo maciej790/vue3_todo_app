@@ -24,8 +24,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        border-bottom: 1px solid white;
-
+        
             img{
                 width: 200px;
                 height: 200px;

@@ -48,6 +48,10 @@ export default {
         outline: none;
         border: none;
         border-bottom: 2px solid white;
+
+            @media (max-width: 600px){
+                width: 75%;
+            }
     }
 
     ::placeholder{

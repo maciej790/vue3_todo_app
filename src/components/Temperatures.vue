@@ -1,13 +1,15 @@
 <template>
     <div class="temperatures">
         <div class="temp_actual">
-            <p>{{temp}}</p>
+            <p>{{temp + '°C'}}</p>
         </div>
         <div class="temp_min">
-            <p>{{temp_min}}</p>
+            <u>min:</u>
+            <p>{{temp_min + '°C'}}</p>
         </div>
         <div class="temp_max">
-            <p>{{temp_max}}</p>
+            <u>max:</u>
+            <p>{{temp_max + '°C'}}</p>
         </div>
     </div>
 </template>
@@ -44,33 +46,55 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 300px;
+    margin-top: 200px;
     text-align: center;
+
+        u{
+            margin-bottom: 5px;
+        }
 
         .temp_actual{
             width: 100px;
-            height: 100px;
+            height: 50px;
             margin-bottom: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
+
+                p{
+                    font-weight: bold;
+                    font-size: 55px;
+                }
         }
 
         .temp_min{
             width: 100px;
-            height: 100px;
+            height: 50px;
             margin-bottom: 50px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+
+                p{
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+
         }
 
         .temp_max{
             width: 100px;
-            height: 100px;
+            height: 50px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+
+                   p{
+                    font-size: 20px;
+                    font-weight: bold;
+                }
         }
 }
 </style>
