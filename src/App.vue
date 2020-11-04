@@ -53,9 +53,6 @@ export default {
         { temp_min: "" },
         { temp_max: "" },
         { weather_state_img: "" },
-        { humidity: "" },
-        { speed: "" },
-        { pressure: "" },
       ],
 
       temp: computed(
@@ -67,15 +64,6 @@ export default {
       temp_max: computed(
         () => Math.round(state.results[4].temp_max)
       ),
-      humidity: computed(
-        () => Math.round(state.results[6].humidity)
-      ),
-      speed: computed(
-        () => Math.round(state.results[7].speed)
-      ),
-      pressure: computed(
-        () => Math.round(state.results[8].pressure)
-      ),
 
       state: false,
     });
@@ -83,7 +71,7 @@ export default {
     const handleChange = (payload) => {
       const location = payload;
 
-      const url = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=962e96c7edd5b917153804d1e003d0ff&units=metric`;
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=962e96c7edd5b917153804d1e003d0ff&units=metric`;
 
       axios
         .get(url)
@@ -101,11 +89,7 @@ export default {
           stateProperty[2].temp = apiResoultMain.temp;
           stateProperty[3].temp_min = apiResoultMain.temp_min;
           stateProperty[4].temp_max = apiResoultMain.temp_max;
-          stateProperty[5].weather_state_img = iconUrl;
-          stateProperty[6].humidity = apiResoultMain.humidity;
-          stateProperty[7].speed = apiResoult.wind.speed;
-          stateProperty[8].pressure = apiResoultMain.pressure;
-              
+          stateProperty[5].weather_state_img = iconUrl;              
 
           //change state to display component
           state.state = true;
